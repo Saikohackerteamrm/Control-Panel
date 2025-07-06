@@ -1,0 +1,779 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saiko Hacker Team {R.M} - Trainers & Mentors</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f1a2b, #1a2a3d, #0a0a20);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(13, 20, 33, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0, 0, 255, 0.3);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 132, 255, 0.4);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .logo img {
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid #0084ff;
+            box-shadow: 0 0 20px rgba(0, 132, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 30px rgba(0, 132, 255, 1);
+        }
+
+        .logo h1 {
+            margin-left: 15px;
+            font-size: 24px;
+            color: #0084ff;
+            text-shadow: 0 0 15px rgba(0, 132, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .logo h1:hover {
+            text-shadow: 0 0 25px rgba(0, 132, 255, 1);
+            transform: translateX(5px);
+        }
+
+        .menu-btn {
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: #0084ff;
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.3s ease;
+            animation: fadeInRight 1s ease-out;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                transform: translateX(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .menu-btn:hover {
+            color: #00b3ff;
+            transform: scale(1.2) rotate(90deg);
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 350px;
+            height: 100vh;
+            background: linear-gradient(135deg, #0a1525, #162238);
+            padding-top: 80px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .nav-menu.active {
+            right: 0;
+        }
+
+        .nav-menu ul {
+            list-style: none;
+        }
+
+        .nav-menu ul li {
+            padding: 20px 30px;
+            border-bottom: 1px solid rgba(0, 132, 255, 0.2);
+            transform: translateX(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu.active ul li {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .nav-menu ul li:nth-child(1) { transition-delay: 0.1s; }
+        .nav-menu ul li:nth-child(2) { transition-delay: 0.2s; }
+        .nav-menu ul li:nth-child(3) { transition-delay: 0.3s; }
+        .nav-menu ul li:nth-child(4) { transition-delay: 0.4s; }
+        .nav-menu ul li:nth-child(5) { transition-delay: 0.5s; }
+
+        .nav-menu ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-menu ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 132, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-menu ul li a:hover::before {
+            left: 100%;
+        }
+
+        .nav-menu ul li a:hover {
+            color: #0084ff;
+            transform: translateX(15px);
+            text-shadow: 0 0 10px rgba(0, 132, 255, 0.5);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            z-index: 998;
+            transition: opacity 0.3s ease;
+        }
+
+        .overlay.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .page-title {
+            text-align: center;
+            padding: 50px 0;
+            font-size: 42px;
+            color: #0084ff;
+            text-shadow: 0 0 15px rgba(0, 132, 255, 0.6);
+            animation: fadeInUp 1s ease-out;
+            background: linear-gradient(45deg, #0084ff, #00b3ff, #0084ff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out, gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .trainers-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .trainer-card {
+            background: linear-gradient(145deg, #101c2e, #1d2d45);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            margin-bottom: 50px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0, 132, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+            position: relative;
+        }
+
+        .trainer-card:nth-child(1) { animation-delay: 0.1s; }
+        .trainer-card:nth-child(2) { animation-delay: 0.2s; }
+        .trainer-card:nth-child(3) { animation-delay: 0.3s; }
+        .trainer-card:nth-child(4) { animation-delay: 0.4s; }
+        .trainer-card:nth-child(5) { animation-delay: 0.5s; }
+        .trainer-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .trainer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0, 132, 255, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .trainer-card:hover::before {
+            opacity: 1;
+        }
+
+        .trainer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 132, 255, 0.3);
+            border-color: rgba(0, 132, 255, 0.5);
+        }
+
+        @media (min-width: 768px) {
+            .trainer-card {
+                flex-direction: row;
+            }
+        }
+
+        .trainer-image {
+            flex: 0 0 320px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            background-image: url('received_1447782936665376.jpeg');
+            background-color: #1d2d45;
+            /* Purple glowing circle effect for trainers */
+            border-radius: 50%;
+            margin: 20px;
+            border: 4px solid #8b5cf6;
+            box-shadow: 
+                0 0 20px rgba(139, 92, 246, 0.6),
+                0 0 40px rgba(139, 92, 246, 0.4),
+                0 0 60px rgba(139, 92, 246, 0.2),
+                inset 0 0 20px rgba(139, 92, 246, 0.1);
+            animation: purpleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes purpleGlow {
+            from {
+                box-shadow: 
+                    0 0 20px rgba(139, 92, 246, 0.6),
+                    0 0 40px rgba(139, 92, 246, 0.4),
+                    0 0 60px rgba(139, 92, 246, 0.2),
+                    inset 0 0 20px rgba(139, 92, 246, 0.1);
+            }
+            to {
+                box-shadow: 
+                    0 0 30px rgba(139, 92, 246, 0.8),
+                    0 0 60px rgba(139, 92, 246, 0.6),
+                    0 0 90px rgba(139, 92, 246, 0.4),
+                    inset 0 0 30px rgba(139, 92, 246, 0.2);
+            }
+        }
+
+        @media (max-width: 767px) {
+            .trainer-image {
+                height: 300px;
+                flex: none;
+                margin: 20px auto;
+                width: 280px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .trainer-image {
+                height: 320px;
+                width: 320px;
+            }
+        }
+
+        .trainer-content {
+            padding: 40px;
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .trainer-name {
+            font-size: 32px;
+            margin-bottom: 12px;
+            color: #0084ff;
+            transition: all 0.3s ease;
+        }
+
+        .trainer-card:hover .trainer-name {
+            color: #00b3ff;
+            text-shadow: 0 0 15px rgba(0, 179, 255, 0.5);
+        }
+
+        .trainer-title {
+            font-size: 20px;
+            color: #7a8ca5;
+            margin-bottom: 25px;
+            display: block;
+            font-weight: 500;
+        }
+
+        .trainer-bio {
+            color: #b8c7d9;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .trainer-specialties {
+            margin-bottom: 30px;
+        }
+
+        .specialty-title {
+            font-size: 20px;
+            color: #0084ff;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .specialty-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .specialty-tag {
+            background: rgba(0, 132, 255, 0.15);
+            border: 1px solid rgba(0, 132, 255, 0.3);
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 14px;
+            color: #b8c7d9;
+            transition: all 0.3s ease;
+        }
+
+        .specialty-tag:hover {
+            background: rgba(0, 132, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 132, 255, 0.2);
+        }
+
+        .trainer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 132, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0084ff;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0, 132, 255, 0.3);
+            font-size: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #0084ff, #00b3ff);
+            transform: scale(0);
+            transition: transform 0.3s ease;
+            border-radius: 50%;
+        }
+
+        .social-link:hover::before {
+            transform: scale(1);
+        }
+
+        .social-link i {
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-link:hover {
+            color: #ffffff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 132, 255, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .trainers-container {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 32px;
+                padding: 40px 0;
+            }
+            
+            .logo h1 {
+                font-size: 18px;
+            }
+            
+            .logo img {
+                height: 45px;
+            }
+            
+            .trainer-content {
+                padding: 30px 25px;
+            }
+            
+            .trainer-name {
+                font-size: 26px;
+            }
+            
+            .trainer-title {
+                font-size: 18px;
+            }
+            
+            .trainer-bio {
+                font-size: 15px;
+            }
+            
+            .nav-menu {
+                width: 280px;
+                right: -280px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 28px;
+                padding: 30px 15px;
+            }
+            
+            .trainers-container {
+                padding: 10px;
+            }
+            
+            .trainer-content {
+                padding: 25px 20px;
+            }
+            
+            .trainer-name {
+                font-size: 24px;
+            }
+            
+            .trainer-title {
+                font-size: 16px;
+            }
+            
+            .trainer-bio {
+                font-size: 14px;
+            }
+            
+            .specialty-title {
+                font-size: 18px;
+            }
+            
+            .logo h1 {
+                font-size: 16px;
+                margin-left: 10px;
+            }
+            
+            .logo img {
+                height: 40px;
+            }
+            
+            .trainer-image {
+                width: 250px;
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="IMG_20250630_211750_535.webp" alt="Team S-H-T Logo">
+            <h1>Saiko Hacker Team {R.M}</h1>
+        </div>
+        <button class="menu-btn" id="menuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+
+    <div class="nav-menu" id="navMenu">
+        <ul>
+            <li><a href="https://cyberslayersbd.blogspot.com/">Home</a></li>
+            <li><a href="https://cyber-slayers.github.io/cyberslayersbd/courses.html">Courses</a></li>
+            <li><a href="https://cyber-slayers.github.io/cyberslayersbd/trainers.html">Trainers & Mentors</a></li>
+            <li><a href="https://cyber-slayers.github.io/cyberslayersbd/team-owner.html">Team Owner</a></li>            
+            <li><a href="https://cyber-slayers.github.io/cyberslayersbd/contact.html">Contact</a></li>
+        </ul>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <h1 class="page-title">Our Trainers & Mentors</h1>
+    <div class="trainers-container">
+        <!-- NH Prince -->
+        <div class="trainer-card">
+            <div class="trainer-image" style="background-image: url('received_1447782936665376.jpeg')"></div>
+            <div class="trainer-content">
+                <h2 class="trainer-name"><strong>🔐 Riyad Molla</strong></h2>
+                <span class="trainer-title">Admin & Chief Security Officer
+</span>
+                <p class="trainer-bio">I'm RIYAD Molla, working as a Admin of Téãm S-H-T. I specialize in removing spam, 18+ content, and protecting against digital copyright violations. 
+💻 With deep knowledge in copyright enforcement, spam detection, and network safety, I work tirelessly to keep the digital world clean and secure. I believe in ethical hacking, Islamic values, and digital justice.</p>
+                <div class="trainer-specialties">
+                    <h3 class="specialty-title">Specialties</h3>
+                    <div class="specialty-list">
+                        <span class="specialty-tag">Removing spam & 18+ content</span>
+                        <span class="specialty-tag">Spamming Specialist</span>
+                        <span class="specialty-tag">Copyright Specialist</span>
+                        <span class="specialty-tag">Learning Networking</span>
+                    </div>
+                </div>
+                <div class="trainer-social">
+                    <a href="https://www.facebook.com/riyad008ex" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://t.me/Riyad07e" class="social-link"><i class="fab fa-telegram"></i></a>
+                    <a href="https://wa.me/8801880845523?text=Hello%20Team%20S-H-T" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Md Sahed Rayhan Shuvo -->
+        <div class="trainer-card">
+            <div class="trainer-image" style="background-image: url('1751823747912.jpg')"></div>
+            <div class="trainer-content">
+                <h2 class="trainer-name">🔐 Kevin Martin</h2>
+                <span class="trainer-title">Senior Admin & Chief Executive Officer</span>
+                <p class="trainer-bio"> I’m Kevin Martin, a Black Hat Hacker turned cyber security specialist with deep experience in digital exploitation, ethical hacking, and advanced threat tactics. I’ve walked through firewalls, danced with zero-days, and infiltrated networks most would call impenetrable.
+ </p>
+                <div class="trainer-specialties">
+                    <h3 class="specialty-title">Specialties</h3>
+                    <div class="specialty-list">
+                        <span class="specialty-tag">Malware Analysis</span>
+                        <span class="specialty-tag">Zero-Day Exploitation</span>
+                        <span class="specialty-tag">Web Pentration Tester</span>
+                        <span class="specialty-tag">Bug Bunty Hunter</span>
+                    </div>
+                </div>
+                <div class="trainer-social">
+                    <a href="https://www.facebook.com/profile.php?id=100009019412519" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/8801717-862887?text=Hello%20Team%20S-H-T" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://t.me/kevin_martinn" class="social-link"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Md Alfaz -->
+        <div class="trainer-card">
+            <div class="trainer-image" style="background-image: url('1751824032149.jpg')"></div>
+            <div class="trainer-content">
+                <h2 class="trainer-name">Hasira Raiyan </h2>
+                <span class="trainer-title">Head Sector of Team S-H-T</span>
+                <p class="trainer-bio">I'm Hasira Raiyan — a cyber security movement built to defend the digital world by first understanding how to break it. As a  Cyber Attack Specialist, my mission is to simulate real-world threats, think like adversaries, and uncover the weaknesses in networks, applications, and infrastructures before the black hats do.Under my leadership, we focus on ethical cyber attacks, critical vulnerability research, and building a cyber-resilient community ready to face modern threats.</p>
+                <div class="trainer-specialties">
+                    <h3 class="specialty-title">Specialties</h3>
+                    <div class="specialty-list">
+                        <span class="specialty-tag">Red Team Analyst </span>
+                        <span class="specialty-tag">Senior Programer</span>
+                        <span class="specialty-tag">Networking Expert</span>
+                        <span class="specialty-tag">Full Stack Development</span>
+                    </div>
+                </div>
+                <div class="trainer-social">
+                    <a href="https://www.facebook.com/hasira47" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/8801614392747?text=Hello%20Team%20S-H-T" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://t.me/Nezarbro" class="social-link"><i class="fab fa-telegram"></i></a>
+      </div>
+            </div>
+        </div>
+
+        <!-- MD Tawhed -->
+        <div class="trainer-card">
+            <div class="trainer-image" style="background-image: url('IMG-20250706-WA0009.jpg')"></div>
+            <div class="trainer-content">
+                <h2 class="trainer-name">Majharul Islam</h2>
+                <span class="trainer-title">Cyber Warrior with a Purpose</span>
+                <p class="trainer-bio">I'm Majharul Islam, I’ve taken my first step into the Cyber Warrior path — with a strong heart and a clear mission.
+
+I didn’t come here to destroy or show off.
+I came here to learn hacking not for harm, but to protect networks, safeguard the innocent, and stand for Islam. Improving pentest efficiency by 80%.</p>
+                <div class="trainer-specialties">
+                    <h3 class="specialty-title">Specialties</h3>
+                    <div class="specialty-list">
+                        <span class="specialty-tag">Protect cyber threats</span>
+                        <span class="specialty-tag">Terminal Expert</span> </br> 
+                        <span class="specialty-tag"> Junior Programer</span> 
+                        </br>    <span class="specialty-tag">SQL Injecting </span>
+                    </div>
+                </div>
+                <div class="trainer-social">
+                    <a href="https://www.facebook.com/md.majharul.islam.172980" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/qr/LD44DTOIRQSEC1" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://t.me/majharul420" class="social-link"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mufthkerul Islam Miraj -->
+        <div class="trainer-card">
+            <div class="trainer-image" style="background-image: url('IMG_20250706_224116.jpg')"></div>
+            <div class="trainer-content">
+                <h2 class="trainer-name"> Khaled Saifullah </h2>
+                <span class="trainer-title">Programer & Cyber Security Leader</span>
+                <p class="trainer-bio">leads front-end and back-end teams in delivering secure, scalable web solutions, with a focus on modern frameworks and best practices.</p>
+                <div class="trainer-specialties">
+                    <h3 class="specialty-title">Specialties</h3>
+                    <div class="specialty-list">
+                        <span class="specialty-tag">Web Shelling </span>
+                        <span class="specialty-tag">Junior Programer </span>
+                        <span class="specialty-tag">Web Pentration Testing </span>
+                        <span class="specialty-tag">Tools Development</span>
+                    </div>
+                </div>
+                <div class="trainer-social">
+                    <a href="https://www.facebook.com/basel.hamed.bd" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/8801307443081" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://t.me/@Bhh71" class="social-link"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ibrahim Nury -->
+        <div class="trainer-card">
+            <div class="trainer-image" style="background-image: url('1000004907.webp')"></div>
+            <div class="trainer-content">
+                <h2 class="trainer-name"> Mohammad Rakib </h2>
+                <span class="trainer-title">Social Security Manager</span>
+                <p class="trainer-bio">I'm Mohammad Rakib , I have strong knowledge of spamming techniques and a foundational understanding of ethical hacking.
+I’m aware of how phishing links operate and how they can be used to exploit users.
+I also understand methods that can potentially access a device’s camera or gallery.
+I use this knowledge strictly for educational purposes and to raise awareness about digital security.</p>
+                <div class="trainer-specialties">
+                    <h3 class="specialty-title">Specialties</h3>
+                    <div class="specialty-list">
+                        <span class="specialty-tag">Social Engineering</span>
+                        <span class="specialty-tag">Android Hacking</span>
+                        <span class="specialty-tag">SQL Injecting</span>
+                        <span class="specialty-tag">Web Development</span>
+                    </div>
+                </div>
+                <div class="trainer-social">
+                    <a href="https://www.facebook.com/profile.php?id=61573203663410" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/8801839986147" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://t.me/Rakib_Islam_001" class="social-link"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const navMenu = document.getElementById('navMenu');
+        const overlay = document.getElementById('overlay');
+
+        menuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            if (navMenu.classList.contains('active')) {
+                menuBtn.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+
+        overlay.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+
+        // Add intersection observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.trainer-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
